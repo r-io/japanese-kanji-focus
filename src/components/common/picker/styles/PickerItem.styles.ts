@@ -8,7 +8,7 @@ export default StyleSheet.create({
     paddingVertical: 10
   },
   label: {
-    ...fonts.mediumPrimary,
+    ...fonts.medium,
     textAlign: 'left',
     flex: 1
   }
