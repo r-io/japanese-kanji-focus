@@ -1,0 +1,90 @@
+{
+  "name": "japanese-kanji-focus",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "tslint --config tslint.json --fix --project tsconfig.json src/**/*.{ts,tsx}",
+    "publish-android": "cd android && ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.7.1",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/toolbar-android": "^0.1.0-rc.2",
+    "axios": "^0.21.0",
+    "bind-decorator": "^1.0.11",
+    "formik": "^2.1.2",
+    "jwt-decode": "^2.2.0",
+    "kanji-dictionary-lookup": "https://github.com/r-io/kanji-dictionary-lookup.git",
+    "react": "^17.0.1",
+    "react-native": "^0.63.3",
+    "react-native-device-info": "^5.6.1",
+    "react-native-dialog": "^5.6.0",
+    "react-native-dotenv": "^0.2.0",
+    "react-native-elements": "r-io/react-native-elements",
+    "react-native-gesture-handler": "^1.5.2",
+    "react-native-kanji-animation": "^1.1.2",
+    "react-native-keep-awake": "^4.0.0",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-modal": "^11.5.3",
+    "react-native-orientation-locker": "^1.1.8",
+    "react-native-reanimated": "^1.4.0",
+    "react-native-root-toast": "3.1.2",
+    "react-native-safe-area-context": "^3.1.8",
+    "react-native-screens": "1.0.0-alpha.23",
+    "react-native-snap-carousel": "^3.8.4",
+    "react-native-splash-screen": "^3.2.0",
+    "react-native-vector-icons": "^7.0.0",
+    "react-native-video": "^5.0.2",
+    "react-navigation": "^4.4.2",
+    "react-navigation-stack": "^2.8.4",
+    "react-navigation-tabs": "^2.9.2",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/runtime": "^7.7.6",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "@types/react": "^16.9.15",
+    "@types/react-native": "^0.60.24",
+    "@types/react-native-dialog": "^5.6.1",
+    "@types/react-native-modal": "^4.1.1",
+    "@types/react-native-snap-carousel": "^3.7.4",
+    "@types/react-native-video": "^3.1.5",
+    "@types/react-redux": "^7.1.5",
+    "@types/validator": "^12.0.1",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "eslint": "^6.7.2",
+    "jest": "^24.9.0",
+    "jetifier": "^1.6.5",
+    "metro-react-native-babel-preset": "^0.57.0",
+    "prettier": "^1.19.1",
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-test-renderer": "16.9.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^9.0.0",
+    "tslint-etc": "^1.10.0",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.7.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "resolutions": {
+    "metro-config": "0.57.0"
+  },
+  "rnpm": {
+    "assets": [
+      ".src/assets/fonts"
+    ]
+  }
+}
