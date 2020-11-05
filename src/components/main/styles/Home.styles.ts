@@ -11,6 +11,6 @@ export default StyleSheet.create({
         borderColor: colors.mediumGray
     },
     cardTitle: {
-        ...fonts.title
+        ...fonts.largeArial
     }
 });

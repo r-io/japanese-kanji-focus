@@ -7,13 +7,13 @@ export default StyleSheet.create({
         backgroundColor: colors.secondaryBackgound
     },
     title: {
-        ...fonts.large
+        ...fonts.mediumArial
     },
     initial: {
-        ...fonts.title
+        ...fonts.largeArial
     },
     subtitle: {
-        ...fonts.medium,
+        ...fonts.mediumMaru,
         color: colors.secondaryText
     }
 });

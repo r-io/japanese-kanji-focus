@@ -68,7 +68,7 @@ class App extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    Orientation.unlockAllOrientations();
+    Orientation.lockToPortrait();
     SplashScreen.hide();
   }
 

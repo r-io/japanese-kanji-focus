@@ -38,6 +38,8 @@ target 'JapaneseKanjiFocus' do
 
   pod 'GoogleSignIn', '~> 5.0.2'
 
+  pod 'RNSketchCanvas', :path => '../node_modules/@terrylinla/react-native-sketch-canvas'
+
   target 'JapaneseKanjiFocusTests' do
     inherit! :search_paths
     # Pods for testing

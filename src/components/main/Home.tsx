@@ -1,12 +1,12 @@
-import colors from '@constants/colors';
+import { NavigationProps as ChallengeNavigationProps } from '@components/challenge/Challenge';
+import circleColors from '@constants/circleColors';
+import kanjiList from '@constants/kanjiList';
 import routes from '@constants/routes';
-import { UserData } from '@typings/model/auth';
 import { Favorite } from '@typings/model/favorite';
 import ReduxState from '@typings/reduxState';
 import bind from 'bind-decorator';
-// import Kanji from 'kanji-dictionary-lookup';
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import { NavigationStackScreenProps } from 'react-navigation-stack';
 import { connect, DispatchProp } from 'react-redux';
@@ -14,7 +14,6 @@ import FavoriteItem from './FavoriteItem';
 import styles from './styles/Home.styles';
 
 export interface StateProps {
-  userData?: UserData;
   lastRatingPopup: Date | undefined;
   isRated: boolean;
 }
@@ -29,32 +28,15 @@ class Home extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      favorites: this.generateFavorites()
+      favorites: kanjiList.data
     };
   }
 
-  // TEMPORARY
-  generateFavorites(): Favorite[] {
-    return [
-      {
-        title: 'Numbers 1',
-        initial: 'N1',
-        color: colors.green,
-        characters: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
-      },
-      {
-        title: 'Numbers 2',
-        initial: 'N2',
-        color: colors.blue,
-        characters: ['百', '千', '万', '円', '口', '目',]
-      }
-    ];
-  }
-
   @bind
-  handlePressFavorite() {
+  handlePressFavorite(favorite: Favorite) {
     const { navigation } = this.props;
-    navigation.navigate(routes.Challenge);
+    const params: ChallengeNavigationProps = { characters: [...favorite.characters] };
+    navigation.navigate(routes.Challenge, params);
   }
 
   renderFavoriteItem(favorite: Favorite, index: number) {
@@ -67,23 +49,33 @@ class Home extends React.Component<Props, State> {
     );
   }
 
+  renderFavoriteAll(favorites: Favorite[]) {
+    const favoriteX: Favorite = {
+      title: 'Exercise 1 - 20',
+      initial: 'X1',
+      characters: [].concat.apply([], favorites.map(favorite => favorite.characters) as any),
+      color: circleColors.red
+    };
+    return this.renderFavoriteItem(favoriteX, 0);
+  }
+
   render() {
     const { favorites } = this.state;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Card containerStyle={styles.card} >
           <Card.Title style={styles.cardTitle}>Favorites</Card.Title>
-          {/* <Card.Divider /> */}
           {favorites.map((favorite, index) => this.renderFavoriteItem(favorite, index))}
+          {this.renderFavoriteAll(favorites)}
         </Card>
-      </View >
+        <View style={{ flex: 1, height: 20 }} />
+      </ScrollView >
     );
   }
 }
 
 function mapStateToProps(state: ReduxState): StateProps {
   return {
-    userData: state.auth.userData,
     lastRatingPopup: state.session.rating.lastRatingPopup,
     isRated: state.session.rating.isRated
   };

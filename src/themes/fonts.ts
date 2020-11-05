@@ -1,27 +1,52 @@
 import colors from '@constants/colors';
 
 const fonts = {
-    small: {
-        fontFamily: 'KosugiMaru-Regular',
-        fontSize: 10,
-        color: colors.primaryText
-    },
-    medium: {
-        fontFamily: 'KosugiMaru-Regular',
+    smallArial: {
+        fontFamily: 'Arial',
         fontSize: 12,
         color: colors.primaryText
     },
-    large: {
-        fontFamily: 'KosugiMaru-Regular',
+    mediumArial: {
+        fontFamily: 'Arial',
+        fontSize: 14,
+        color: colors.primaryText
+    },
+    largeArial: {
+        fontFamily: 'Arial',
+        fontSize: 18,
+        color: colors.primaryText
+    },
+    titleArial: {
+        fontFamily: 'Arial',
+        fontSize: 24,
+        color: colors.primaryText
+    },
+    headerArial: {
+        fontFamily: 'Arial',
+        fontSize: 32,
+        color: colors.primaryText
+    },
+    smallMaru: {
+        fontFamily: 'Arial',
+        fontSize: 10,
+        color: colors.primaryText
+    },
+    mediumMaru: {
+        fontFamily: 'Arial',
+        fontSize: 12,
+        color: colors.primaryText
+    },
+    largeMaru: {
+        fontFamily: 'Arial',
         fontSize: 16,
         color: colors.primaryText
     },
-    title: {
+    titleMaru: {
         fontFamily: 'KosugiMaru-Regular',
         fontSize: 20,
         color: colors.primaryText
     },
-    header: {
+    headerMaru: {
         fontFamily: 'KosugiMaru-Regular',
         fontSize: 32,
         color: colors.primaryText

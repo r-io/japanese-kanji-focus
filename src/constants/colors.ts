@@ -1,12 +1,13 @@
 const colors = {
     white: '#f0f0f0',
     primaryText: '#f0f0f0',
-    secondary: '#f0f0f0',
 
     lightGrey: '#cccccc',
 
     mediumGray: '#888888',
     secondaryText: '#888888',
+
+    darkMediumGrey: '#555555',
 
     grey: '#222222',
     primaryBackground: '#222222',
@@ -18,8 +19,8 @@ const colors = {
     red: '#ff0000',
     primary: '#ff0000',
 
-    blue: '#2089dc',
-    green: '#1fb141',
+    orange: '#f26c23',
+    secondary: '#f26c23',
 
     // trueWhite: '#ffffff',
 
