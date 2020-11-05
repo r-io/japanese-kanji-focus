@@ -67,5 +67,11 @@ export default StyleSheet.create({
     },
     sketchCanvas: {
         flex: 1
+    },
+    hintButton: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        zIndex: 10
     }
 });

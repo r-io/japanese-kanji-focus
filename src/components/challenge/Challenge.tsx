@@ -7,7 +7,7 @@ import KanjiDictionary from 'kanji-dictionary-lookup';
 import { KanjiResult } from 'kanji.js';
 import React from 'react';
 import { Dimensions, View } from 'react-native';
-import { Badge, Text } from 'react-native-elements';
+import { Badge, Icon, Text } from 'react-native-elements';
 import { Kanji } from 'react-native-kanji-animation';
 import Svg, { Line } from 'react-native-svg';
 import { NavigationStackScreenProps } from 'react-navigation-stack';
@@ -23,14 +23,20 @@ type Props = NavigationStackScreenProps<NavigationProps> & DispatchProp;
 interface State extends NavigationProps {
   canvasSize: number;
   step: number;
+  tries: number;
   strokeCoordinates: Coordinate[][];
   kanjiDetail?: KanjiResult;
+  showHintButton: boolean;
+  showKanjiHint: boolean;
+  showCorrect: boolean;
 }
 
 class Challenge extends React.Component<Props, State> {
 
   canvas: SketchCanvas | null = null;
   kanji: Kanji | null = null;
+  kanjiHint: Kanji | null = null;
+  kanjiCorrect: Kanji | null = null;
 
   constructor(props: Props) {
     super(props);
@@ -38,6 +44,10 @@ class Challenge extends React.Component<Props, State> {
       strokeCoordinates: [],
       canvasSize: Dimensions.get('window').width - 60,
       step: 0,
+      tries: 0,
+      showHintButton: false,
+      showKanjiHint: false,
+      showCorrect: false,
       ...mapNavigationToState(props.navigation)
     };
   }
@@ -47,16 +57,26 @@ class Challenge extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    const { step, strokeCoordinates } = this.state;
+    const { step, strokeCoordinates, tries, showHintButton, showCorrect } = this.state;
     if (step === strokeCoordinates.length && strokeCoordinates.length > 0) {
-      setTimeout(() => {
-        this.setState({
-          step: 0,
-          strokeCoordinates: []
-        }, () => {
-          this.pickElement();
+      if (!showCorrect) {
+        this.setState({ showCorrect: true }, () => {
+          this.kanjiCorrect?.animate(() => {
+            setTimeout(() => {
+              this.setState({
+                step: 0,
+                strokeCoordinates: [],
+                showCorrect: false
+              }, () => {
+                this.pickElement();
+              });
+            }, 500);
+          });
         });
-      }, 2000);
+      }
+    }
+    if (tries >= 3 && !showHintButton) {
+      this.setState({ showHintButton: true });
     }
   }
 
@@ -104,6 +124,15 @@ class Challenge extends React.Component<Props, State> {
   }
 
   @bind
+  handlePressHint() {
+    this.setState({ showKanjiHint: true }, () => {
+      this.kanjiHint?.animate(() => {
+        this.setState({ showKanjiHint: false });
+      });
+    });
+  }
+
+  @bind
   handleStrokeEnd({ path }: Path) {
     if (!this.canvas) {
       return;
@@ -117,14 +146,20 @@ class Challenge extends React.Component<Props, State> {
       };
     });
 
-    const { strokeCoordinates, step } = this.state;
+    const { strokeCoordinates, step, tries } = this.state;
     if (step === strokeCoordinates.length) {
       return;
     }
     const verdict = this.getVerdict(strokeCoordinates[step], coordinates);
     if (verdict) {
       this.setState({
-        step: step + 1
+        step: step + 1,
+        tries: 0,
+        showHintButton: false
+      });
+    } else {
+      this.setState({
+        tries: tries < 3 ? tries + 1 : tries
       });
     }
   }
@@ -238,7 +273,7 @@ class Challenge extends React.Component<Props, State> {
   }
 
   renderCanvas() {
-    const { canvasSize, step, kanjiDetail } = this.state;
+    const { canvasSize, step, kanjiDetail, showHintButton, showKanjiHint, showCorrect } = this.state;
     if (!kanjiDetail) {
       return;
     }
@@ -246,6 +281,19 @@ class Challenge extends React.Component<Props, State> {
       <View
         style={styles.canvasContainer}
       >
+        {showHintButton &&
+          <Icon
+            raised
+            containerStyle={styles.hintButton}
+            disabled={showKanjiHint}
+            reverse={true}
+            color={'red'}
+            name={'lightbulb'}
+            type={'foundation'}
+            size={15}
+            onPress={this.handlePressHint}
+          />
+        }
         <View
           style={[styles.canvasInnerContainer, { height: canvasSize }]}
         >
@@ -257,10 +305,36 @@ class Challenge extends React.Component<Props, State> {
             element={kanjiDetail.literal}
             step={step}
           />
+          <Kanji
+            ref={el => this.kanjiHint = el}
+            containerStyle={styles.kanjiAnswer}
+            size={canvasSize}
+            element={kanjiDetail.literal}
+            previousStep={false}
+            step={step + 1}
+            duration={1000}
+            pathProps={{
+              strokeOpacity: (showKanjiHint) ? 1 : 0,
+              stroke: colors.red
+            }}
+          />
+          <Kanji
+            ref={el => this.kanjiCorrect = el}
+            containerStyle={styles.kanjiAnswer}
+            size={canvasSize}
+            element={'O'}
+            step={1}
+            duration={500}
+            pathProps={{
+              strokeOpacity: showCorrect ? 0.4 : 0,
+              stroke: colors.red,
+              strokeWidth: 12
+            }}
+          />
           <SketchCanvas
             ref={el => this.canvas = el}
             style={styles.sketchCanvas}
-            strokeColor={'white'}
+            strokeColor={colors.white}
             strokeWidth={7}
             onStrokeEnd={this.handleStrokeEnd}
           />
