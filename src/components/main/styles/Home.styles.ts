@@ -10,6 +10,24 @@ export default StyleSheet.create({
         backgroundColor: colors.secondaryBackgound,
         borderColor: colors.mediumGray
     },
+    cardHeaderContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 15
+    },
+    cardHeader: {
+        ...fonts.titleArial,
+        alignItems: 'center',
+        display: 'flex',
+        marginBottom: 0
+    },
+    cardTitleContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     cardTitle: {
         ...fonts.largeArial
     }

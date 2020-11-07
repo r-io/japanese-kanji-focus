@@ -1,4 +1,4 @@
-export interface Favorite {
+export interface Set {
   title: string;
   initial: string;
   color: string;
