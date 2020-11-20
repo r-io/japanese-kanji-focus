@@ -7,8 +7,8 @@ export function getStatusBarSettings(route: string): StatusBarProps {
     case routes.Landing:
     case routes.Main:
     case routes.Home:
-    case routes.Documentary:
-    case routes.Movie:
+    case routes.Settings:
+    case routes.Favourite:
     case routes.Search:
     default:
       return statusBar.black;

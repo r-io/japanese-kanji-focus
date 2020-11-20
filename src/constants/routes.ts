@@ -5,11 +5,12 @@ const routes = {
 
     Main: 'Main',
     Home: 'Home',
-    Documentary: 'Documentary',
-    Movie: 'Movie',
+    Favourite: 'Favourite',
+    Settings: 'Settings',
 
     Search: 'Search',
 
+    Study: 'Study',
     Challenge: 'Challenge',
 };
 

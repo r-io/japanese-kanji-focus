@@ -1,6 +1,6 @@
-import Documentary from '@components/main/Documentary';
+import Favourite from '@components/main/Favourite';
 import Home from '@components/main/Home';
-import Movie from '@components/main/Movie';
+import Settings from '@components/main/Settings';
 import LogoTitle from '@components/navigation/LogoTitle';
 import SearchButton from '@components/navigation/SearchButton';
 import colors from '@constants/colors';
@@ -13,8 +13,8 @@ import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 const Main = createMaterialTopTabNavigator(
   {
     Home,
-    Documentary,
-    Movie
+    Favourite,
+    Settings
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -28,14 +28,14 @@ const Main = createMaterialTopTabNavigator(
         let iconName = '';
         let iconType = '';
         if (routeName === routes.Home) {
-          iconType = 'entypo';
-          iconName = 'home';
-        } else if (routeName === routes.Documentary) {
           iconType = 'ionicon';
-          iconName = 'md-videocam';
-        } else if (routeName === routes.Movie) {
-          iconType = 'material-community';
-          iconName = 'filmstrip';
+          iconName = 'home';
+        } else if (routeName === routes.Favourite) {
+          iconType = 'ionicon';
+          iconName = 'heart';
+        } else if (routeName === routes.Settings) {
+          iconType = 'ionicon';
+          iconName = 'md-settings-sharp';
         }
         return <Icon type={iconType} name={iconName} size={25} color={tintColor} />;
       }
