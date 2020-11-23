@@ -36,8 +36,6 @@ target 'JapaneseKanjiFocus' do
 
   pod 'react-native-google-cast/NoBluetooth', path: '../node_modules/react-native-google-cast/ios/'
 
-  pod 'GoogleSignIn', '~> 5.0.2'
-
   pod 'RNSketchCanvas', :path => '../node_modules/@terrylinla/react-native-sketch-canvas'
 
   target 'JapaneseKanjiFocusTests' do

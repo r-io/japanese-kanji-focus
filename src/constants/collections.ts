@@ -285,6 +285,33 @@ const part2: Set[] = [
     }
 ];
 
+const part3: Set[] = [
+    {
+        title: 'Exercise 31',
+        initial: 'E21',
+        color: circleColors.orange,
+        characters: ['丸', '熱', '冷', '甘', '汚', '果', '卵', '皿']
+    },
+    {
+        title: 'Exercise 32',
+        initial: 'E22',
+        color: circleColors.orange,
+        characters: ['酒', '塩', '付', '片', '焼', '消', '固', '個']
+    },
+    {
+        title: 'Exercise 33',
+        initial: 'E23',
+        color: circleColors.orange,
+        characters: ['笑', '泣', '怒', '幸', '悲', '苦', '痛', '恥']
+    },
+    {
+        title: 'Exercise 34',
+        initial: 'E24',
+        color: circleColors.orange,
+        characters: ['配', '困', '辛', '眠', '残', '念', '感', '情']
+    }
+];
+
 const collections: Collection[] = [
     {
         index: 1,
@@ -295,6 +322,11 @@ const collections: Collection[] = [
         index: 2,
         title: 'Part 2',
         sets: part2
+    },
+    {
+        index: 3,
+        title: 'Part 3',
+        sets: part3
     }
 ];
 

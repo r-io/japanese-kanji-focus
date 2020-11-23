@@ -4,11 +4,10 @@ import LoaderControl from '@components/common/loaderControl/LoaderControl';
 import Picker from '@components/common/picker/Picker';
 import { PickerItemData } from '@components/common/picker/PickerItem';
 import colors from '@constants/colors';
-import { FILTER_BY_DATA, filterByType, SORT_BY_DATA } from '@constants/picker';
+import { FILTER_BY_DATA, SORT_BY_DATA } from '@constants/picker';
 // import routes from '@constants/routes';
 import { getFilmAdvancedSearch } from '@helpers/api';
 import { GetFilmAdvancedSearchParam } from '@typings/film';
-import { UserData } from '@typings/model/auth';
 import { Film } from '@typings/model/film';
 import ReduxState from '@typings/reduxState';
 import bind from 'bind-decorator';
@@ -22,7 +21,6 @@ import { connect, DispatchProp } from 'react-redux';
 import styles from './styles/Search.styles';
 
 interface StateProps {
-  userData?: UserData;
   filterBy: string;
   sortBy: string;
 }
@@ -99,13 +97,13 @@ class Search extends React.Component<Props, State> {
   }
 
   mapFilterBy(filterByData: PickerItemData[]) {
-    const { userData } = this.props;
-    if (userData?.libraryLogin === true) {
-      filterByData = filterByData.filter(item =>
-        [filterByType.subscriber, filterByType.premiumRental]
-          .indexOf(item.value as string) === -1
-      );
-    }
+    // const { userData } = this.props;
+    // if (userData?.libraryLogin === true) {
+    //   filterByData = filterByData.filter(item =>
+    //     [filterByType.subscriber, filterByType.premiumRental]
+    //       .indexOf(item.value as string) === -1
+    //   );
+    // }
     return filterByData;
   }
 
@@ -372,7 +370,6 @@ class Search extends React.Component<Props, State> {
 
 function mapStateToProps(state: ReduxState): StateProps {
   return {
-    userData: state.auth.userData,
     filterBy: state.session.filterSort.filterBy,
     sortBy: state.session.filterSort.sortBy
   };
