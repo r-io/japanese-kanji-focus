@@ -287,30 +287,152 @@ const part2: Set[] = [
 
 const part3: Set[] = [
     {
-        title: 'Exercise 31',
-        initial: 'E21',
-        color: circleColors.orange,
+        title: 'Exercise 41',
+        initial: 'E41',
+        color: circleColors.yellow1,
         characters: ['丸', '熱', '冷', '甘', '汚', '果', '卵', '皿']
     },
     {
-        title: 'Exercise 32',
-        initial: 'E22',
-        color: circleColors.orange,
+        title: 'Exercise 42',
+        initial: 'E42',
+        color: circleColors.yellow2,
         characters: ['酒', '塩', '付', '片', '焼', '消', '固', '個']
     },
     {
-        title: 'Exercise 33',
-        initial: 'E23',
-        color: circleColors.orange,
+        title: 'Exercise 43',
+        initial: 'E43',
+        color: circleColors.yellow3,
         characters: ['笑', '泣', '怒', '幸', '悲', '苦', '痛', '恥']
     },
     {
-        title: 'Exercise 34',
-        initial: 'E24',
-        color: circleColors.orange,
+        title: 'Exercise 44',
+        initial: 'E44',
+        color: circleColors.yellow4,
         characters: ['配', '困', '辛', '眠', '残', '念', '感', '情']
+    },
+    {
+        title: 'Exercise 45',
+        initial: 'E45',
+        color: circleColors.yellow5,
+        characters: ['覚', '忘', '決', '定', '比', '受', '授', '徒']
+    },
+    {
+        title: 'Exercise 46',
+        initial: 'E46',
+        color: circleColors.yellow6,
+        characters: ['練', '復', '表', '卒', '違', '役', '皆', '彼']
+    },
+    {
+        title: 'Exercise 47',
+        initial: 'E47',
+        color: circleColors.yellow7,
+        characters: ['全', '部', '必', '要', '荷', '由', '届', '利']
+    },
+    {
+        title: 'Exercise 48',
+        initial: 'E48',
+        color: circleColors.yellow8,
+        characters: ['払', '濯', '寝', '踊', '活', '末', '宅', '祭']
+    },
+    {
+        title: 'Exercise 49',
+        initial: 'E49',
+        color: circleColors.yellow9,
+        characters: ['平', '和', '戦', '争', '政', '治', '経', '済']
+    },
+    {
+        title: 'Exercise 50',
+        initial: 'E50',
+        color: circleColors.yellow10,
+        characters: ['法', '律', '際', '関', '係', '義', '議', '党']
+    },
+    {
+        title: 'Exercise 51',
+        initial: 'E51',
+        color: circleColors.yellow11,
+        characters: ['遊', '泳', '疲', '暖', '涼', '静', '公', '園']
+    },
+    {
+        title: 'Exercise 52',
+        initial: 'E52',
+        color: circleColors.yellow12,
+        characters: ['込', '連', '窓', '側', '葉', '景', '記', '形']
+    },
+    {
+        title: 'Exercise 53',
+        initial: 'E53',
+        color: circleColors.yellow13,
+        characters: ['吉', '結', '婚', '共', '供', '両', '若', '老']
+    },
+    {
+        title: 'Exercise 54',
+        initial: 'E54',
+        color: circleColors.yellow14,
+        characters: ['息', '娘', '奥', '将', '祖', '育', '性', '招']
+    },
+    {
+        title: 'Exercise 55',
+        initial: 'E55',
+        color: circleColors.yellow15,
+        characters: ['取', '最', '初', '番', '歳', '枚', '冊', '億']
+    },
+    {
+        title: 'Exercise 56',
+        initial: 'E56',
+        color: circleColors.yellow16,
+        characters: ['点', '階', '段', '号', '倍', '次', '々', '他']
+    },
+    {
+        title: 'Exercise 57',
+        initial: 'E57',
+        color: circleColors.yellow17,
+        characters: ['勝', '負', '賛', '成', '絶', '対', '続', '辞']
+    },
+    {
+        title: 'Exercise 58',
+        initial: 'E58',
+        color: circleColors.yellow18,
+        characters: ['投', '選', '約', '束', '守', '過', '夢', '的']
+    },
+    {
+        title: 'Exercise 59',
+        initial: 'E59',
+        color: circleColors.yellow19,
+        characters: ['飛', '機', '失', '鉄', '速', '遅', '駐', '泊']
+    },
+    {
+        title: 'Exercise 60',
+        initial: 'E60',
+        color: circleColors.yellow20,
+        characters: ['船', '座', '席', '島', '陸', '港', '橋', '交']
+    },
+    {
+        title: 'Exercise 61',
+        initial: 'E61',
+        color: circleColors.yellow21,
+        characters: ['申', '神', '様', '信', '調', '査', '相', '談']
+    },
+    {
+        title: 'Exercise 62',
+        initial: 'E62',
+        color: circleColors.yellow22,
+        characters: ['案', '内', '君', '達', '星', '雪', '降', '直']
+    },
+    {
+        title: 'Exercise 63',
+        initial: 'E63',
+        color: circleColors.yellow23,
+        characters: ['危', '険', '拾', '捨', '戻', '吸', '放', '変']
+    },
+    {
+        title: 'Exercise 64',
+        initial: 'E64',
+        color: circleColors.yellow24,
+        characters: ['歯', '髪', '絵', '横', '当', '伝', '細', '無']
     }
 ];
+
+
 
 const collections: Collection[] = [
     {
