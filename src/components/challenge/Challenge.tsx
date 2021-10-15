@@ -6,8 +6,9 @@ import bind from 'bind-decorator';
 import KanjiDictionary from 'kanji-dictionary-lookup';
 import { KanjiResult } from 'kanji.js';
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, LayoutChangeEvent, View } from 'react-native';
 import { Badge, Icon, Text } from 'react-native-elements';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Kanji } from 'react-native-kanji-animation';
 import Svg, { Line } from 'react-native-svg';
 import { NavigationStackScreenProps } from 'react-navigation-stack';
@@ -21,6 +22,7 @@ export interface NavigationProps {
 type Props = NavigationStackScreenProps<NavigationProps> & DispatchProp;
 
 interface State extends NavigationProps {
+  detailsHeight: number;
   canvasSize: number;
   step: number;
   tries: number;
@@ -42,6 +44,7 @@ class Challenge extends React.Component<Props, State> {
     super(props);
     this.state = {
       strokeCoordinates: [],
+      detailsHeight: 0,
       canvasSize: Dimensions.get('window').width - 60,
       step: 0,
       tries: 0,
@@ -343,14 +346,24 @@ class Challenge extends React.Component<Props, State> {
     );
   }
 
+  @bind
+  handleLayout(event: LayoutChangeEvent) {
+    const { height } = event.nativeEvent.layout;
+    this.setState({ detailsHeight: height });
+  }
+
   renderDetails() {
-    const { kanjiDetail } = this.state;
+    const { kanjiDetail, detailsHeight } = this.state;
     if (!kanjiDetail) {
       return;
     }
 
     return (
-      <View style={styles.detailContainer}>
+      <ScrollView
+        contentContainerStyle={[styles.detailContainer, { minHeight: detailsHeight }]}
+        showsVerticalScrollIndicator={false}
+        onLayout={this.handleLayout}
+      >
         <View style={styles.detailUpperContainer}>
           {kanjiDetail.onyomi.map((value, index) =>
             <Badge
@@ -373,7 +386,7 @@ class Challenge extends React.Component<Props, State> {
         <View style={styles.detailLowerContainer}>
           <Text style={styles.meaning}>{kanjiDetail.meanings.join(', ')}</Text>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 

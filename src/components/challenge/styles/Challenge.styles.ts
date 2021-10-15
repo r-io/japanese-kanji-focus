@@ -4,10 +4,9 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     detailContainer: {
-        flex: 1,
         justifyContent: 'space-evenly'
     },
     detailUpperContainer: {
@@ -48,7 +47,9 @@ export default StyleSheet.create({
         textAlign: 'center'
     },
     canvasContainer: {
-        margin: 30,
+        marginHorizontal: 30,
+        marginBottom: 30,
+        marginTop: 10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'flex-end'
