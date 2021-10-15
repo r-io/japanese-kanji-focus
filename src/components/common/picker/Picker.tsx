@@ -1,25 +1,20 @@
-import colors from '@constants/colors';
 import bind from 'bind-decorator';
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { BaseButton, FlatList } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 import Separator from '../separator/Separator';
 import PickerItem, { PickerItemData } from './PickerItem';
 import styles from './styles/Picker.styles';
 
 interface Props {
-	title?: string;
-	value: string;
 	data: PickerItemData[];
-	onValueChange: (value: string) => void;
+	onSelected: (value: PickerItemData) => void;
 }
 
 interface State {
-	selectedData: PickerItemData[];
-	label: string;
 	isVisible: boolean;
+	title?: string;
 }
 
 class Picker extends React.Component<Props, State> {
@@ -27,29 +22,12 @@ class Picker extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
-			selectedData: props.data,
-			label: this.getLabel(props.data),
 			isVisible: false
 		};
 	}
 
-	componentDidUpdate(prevProps: Props) {
-		if (prevProps !== this.props) {
-			if (prevProps.value !== this.props.value) {
-				this.setState({ label: this.getLabel(this.state.selectedData) });
-			}
-		}
-	}
-
-	getLabel(data: PickerItemData[]) {
-		const { value } = this.props;
-		const label = data.find(d => d.value === value)?.label;
-		return label || value;
-	}
-
-	showModal() {
-		const { data } = this.props;
-		this.setState({ isVisible: true, selectedData: data });
+	showModal(title?: string) {
+		this.setState({ isVisible: true, title });
 	}
 
 	dismissModal() {
@@ -58,7 +36,7 @@ class Picker extends React.Component<Props, State> {
 
 	@bind
 	handleKeyExtractor(item: PickerItemData, index: number) {
-		return index + '';
+		return item.value + '#' + index;
 	}
 
 	@bind
@@ -67,16 +45,10 @@ class Picker extends React.Component<Props, State> {
 	}
 
 	@bind
-	handlePressItem(newValue: PickerItemData[] | string) {
-		const { value, onValueChange } = this.props;
-		if (typeof (newValue) === 'string') {
-			if (value !== newValue) {
-				onValueChange(newValue);
-			}
-			this.dismissModal();
-		} else {
-			this.setState({ selectedData: newValue });
-		}
+	handlePressItem(value: PickerItemData) {
+		const { onSelected } = this.props;
+		onSelected(value);
+		this.dismissModal();
 	}
 
 	@bind
@@ -93,7 +65,7 @@ class Picker extends React.Component<Props, State> {
 
 	@bind
 	renderModalHeader() {
-		const { title } = this.props;
+		const { title } = this.state;
 		if (!title) {
 			return null;
 		}
@@ -110,8 +82,9 @@ class Picker extends React.Component<Props, State> {
 		);
 	}
 
-	private renderModal() {
-		const { isVisible, selectedData } = this.state;
+	public render() {
+		const { data } = this.props;
+		const { isVisible } = this.state;
 		return (
 			<Modal
 				isVisible={isVisible}
@@ -119,8 +92,8 @@ class Picker extends React.Component<Props, State> {
 				onBackdropPress={this.handleBackPress}
 			>
 				<View style={styles.modalContainer}>
-					<FlatList
-						data={selectedData}
+					<FlatList<PickerItemData>
+						data={data}
 						ListHeaderComponent={this.renderModalHeader}
 						renderItem={({ item }) => this.renderItem(item)}
 						keyExtractor={this.handleKeyExtractor}
@@ -128,29 +101,6 @@ class Picker extends React.Component<Props, State> {
 					/>
 				</View>
 			</Modal>
-		);
-	}
-
-	public render() {
-		const { label } = this.state;
-		return (
-			<BaseButton style={styles.button} onPress={this.handlePressButton} rippleColor={colors.ripple}>
-				<View style={styles.container}>
-					<Text
-						style={styles.label}
-						allowFontScaling={false}
-					>
-						{label}
-					</Text>
-					<Icon
-						type={'ionicon'}
-						name={'md-chevron-down'}
-						size={20}
-						color={colors.white}
-					/>
-				</View>
-				{this.renderModal()}
-			</BaseButton>
 		);
 	}
 }

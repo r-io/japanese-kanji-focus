@@ -1,4 +1,6 @@
 import { NavigationProps as ChallengeNavigationProps } from '@components/challenge/Challenge';
+import Picker from '@components/common/picker/Picker';
+import { PickerItemData } from '@components/common/picker/PickerItem';
 import circleColors from '@constants/circleColors';
 import jkfCollections from '@constants/collections';
 import colors from '@constants/colors';
@@ -26,9 +28,13 @@ type Props = NavigationStackScreenProps & DispatchProp & StateProps;
 interface State {
   collections: Collection[];
   activeSections: number[];
+  set?: Set;
 }
 
 class Home extends React.Component<Props, State> {
+
+  picker: Picker | null = null;
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -37,11 +43,42 @@ class Home extends React.Component<Props, State> {
     };
   }
 
+	mapPickerItems(): PickerItemData[] {
+		return [
+      {
+        label: 'Study',
+        value: routes.Study
+      },
+      {
+        label: 'Writing Challenge',
+        value: routes.Challenge
+      }
+    ];
+	}
+
   @bind
   handlePressSet(set: Set) {
-    const { navigation } = this.props;
-    const params: ChallengeNavigationProps = { characters: [...set.characters] };
-    navigation.navigate(routes.Challenge, params);
+    if (this.picker) {
+      this.setState({ set });
+      this.picker.showModal(set.title);
+    }
+  }
+
+  @bind
+  handlePickerSelected(item: PickerItemData) {
+    const { set } = this.state;
+    if (!set) {
+      return;
+    }
+    if (item.value === routes.Study) {
+      const { navigation } = this.props;
+      const params: ChallengeNavigationProps = { characters: [...set.characters] };
+      navigation.navigate(routes.Study, params);
+    } else if (item.value === routes.Challenge) {
+      const { navigation } = this.props;
+      const params: ChallengeNavigationProps = { characters: [...set.characters] };
+      navigation.navigate(routes.Challenge, params);
+    }
   }
 
   @bind
@@ -117,6 +154,11 @@ class Home extends React.Component<Props, State> {
           />
         </Card>
         <View style={{ flex: 1, height: 20 }} />
+        <Picker
+          ref={el => this.picker = el}
+          data={this.mapPickerItems()}
+          onSelected={this.handlePickerSelected}
+        />
       </ScrollView >
     );
   }

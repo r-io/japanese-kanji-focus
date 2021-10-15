@@ -18,7 +18,7 @@ export default StyleSheet.create({
   },
   label: {
     flex: 1,
-    ...fonts.small,
+    ...fonts.smallArial,
   },
   modalContainer: {
     flexDirection: 'row',
@@ -29,8 +29,7 @@ export default StyleSheet.create({
     borderRadius: 2
   },
   title: {
-    // ...fonts.title,
-    textAlign: 'center',
-    color: colors.blue
+    ...fonts.largeArial,
+    textAlign: 'center'
   }
 });

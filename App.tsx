@@ -5,6 +5,7 @@ import Main from '@components/main/Main';
 import BackButton from '@components/navigation/BackButton';
 import LogoTitle from '@components/navigation/LogoTitle';
 import Search from '@components/search/Search';
+import Study from '@components/study/Study';
 import routes from '@constants/routes';
 import { getStatusBarSettings } from '@helpers/statusBar';
 import rootReducer from '@reducers/rootReducers';
@@ -30,7 +31,8 @@ const AppNavigator = createStackNavigator(
   {
     Main,
     Search,
-    Challenge
+    Study,
+    Challenge,
   },
   {
     initialRouteName: routes.Main,

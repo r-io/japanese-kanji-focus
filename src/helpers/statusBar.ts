@@ -10,6 +10,8 @@ export function getStatusBarSettings(route: string): StatusBarProps {
     case routes.Settings:
     case routes.Favourite:
     case routes.Search:
+    case routes.Study:
+    case routes.Challenge:
     default:
       return statusBar.black;
   }
