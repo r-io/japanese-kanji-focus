@@ -6,7 +6,7 @@ import styles from './styles/PickerItem.styles';
 
 export interface PickerItemData {
 	label: string;
-	value: string;
+	value: string | number;
 }
 
 interface Props extends PickerItemData {

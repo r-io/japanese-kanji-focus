@@ -1,13 +1,8 @@
 import { ImageSourcePropType } from 'react-native';
-import { UserData } from './model/auth';
 import { Session } from './session';
 
 export interface ApiState {
 	test: any;
-}
-
-export interface AuthState {
-	userData?: UserData;
 }
 
 export interface ErrorState {
@@ -37,7 +32,6 @@ export type SessionState = Session;
 
 export default interface ReduxState {
 	api: ApiState;
-	auth: AuthState;
 	dialog: DialogState;
 	loading: LoadingState;
 	session: SessionState;

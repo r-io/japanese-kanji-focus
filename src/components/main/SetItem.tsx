@@ -6,6 +6,7 @@ import styles from './styles/SetItem.styles';
 
 interface Props {
   set: Set;
+  showTotal?: boolean;
   onPress: (set: Set) => void;
 }
 
@@ -20,7 +21,7 @@ class SetItem extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { set } = this.props;
+    const { set, showTotal } = this.props;
     return (
       <ListItem
         containerStyle={styles.container}
@@ -36,7 +37,10 @@ class SetItem extends React.PureComponent<Props, State> {
         />
         <ListItem.Content>
           <ListItem.Title style={styles.title}>{set.title}</ListItem.Title>
-          <ListItem.Subtitle style={styles.subtitle}>{set.characters}</ListItem.Subtitle>
+          { showTotal
+            ? <ListItem.Subtitle style={styles.subtitle}>{set.characters.length} Kanji</ListItem.Subtitle>
+            : <ListItem.Subtitle style={styles.subtitle}>{set.characters}</ListItem.Subtitle>
+          }
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>

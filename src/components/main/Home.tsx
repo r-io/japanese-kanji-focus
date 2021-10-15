@@ -5,7 +5,9 @@ import circleColors from '@constants/circleColors';
 import jkfCollections from '@constants/collections';
 import colors from '@constants/colors';
 import routes from '@constants/routes';
+import { getRandomKanjiProficiency } from '@helpers/random';
 import { Collection } from '@typings/model/collection';
+import { KanjiProficiency } from '@typings/model/kanjiProficiency';
 import { Set } from '@typings/model/sets';
 import ReduxState from '@typings/reduxState';
 import bind from 'bind-decorator';
@@ -19,8 +21,7 @@ import SetItem from './SetItem';
 import styles from './styles/Home.styles';
 
 export interface StateProps {
-  lastRatingPopup: Date | undefined;
-  isRated: boolean;
+  kanjiProficiencies: KanjiProficiency[];
 }
 
 type Props = NavigationStackScreenProps & DispatchProp & StateProps;
@@ -33,7 +34,8 @@ interface State {
 
 class Home extends React.Component<Props, State> {
 
-  picker: Picker | null = null;
+  challengespicker: Picker | null = null;
+  exercisespicker: Picker | null = null;
 
   constructor(props: Props) {
     super(props);
@@ -43,7 +45,33 @@ class Home extends React.Component<Props, State> {
     };
   }
 
-	mapPickerItems(): PickerItemData[] {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.kanjiProficiencies.length !== this.props.kanjiProficiencies.length) {
+      this.render();
+    }
+  }
+
+	mapChallengesPickerItems(): PickerItemData[] {
+    const { kanjiProficiencies } = this.props;
+    const result: PickerItemData[] = [];
+
+    for (let i=10; i<=100; i+=10) {
+      if (kanjiProficiencies.length < i) {
+        break;
+      }
+      result.push({
+        label: i + ' Characters',
+        value: i
+      });
+    }
+    result.push({
+      label: 'All (' + kanjiProficiencies.length + ' Characters)' ,
+      value: kanjiProficiencies.length
+    });
+		return result;
+	}
+
+  mapExercisesPickerItems(): PickerItemData[] {
 		return [
       {
         label: 'Study',
@@ -57,15 +85,23 @@ class Home extends React.Component<Props, State> {
 	}
 
   @bind
-  handlePressSet(set: Set) {
-    if (this.picker) {
+  handlePressExercisesSet(set: Set) {
+    if (this.exercisespicker) {
       this.setState({ set });
-      this.picker.showModal(set.title);
+      this.exercisespicker.showModal(set.title);
     }
   }
 
   @bind
-  handlePickerSelected(item: PickerItemData) {
+  handlePressChallengesSet(set: Set) {
+    if (this.challengespicker) {
+      this.setState({ set });
+      this.challengespicker.showModal(set.title);
+    }
+  }
+
+  @bind
+  handleExercisesPickerSelected(item: PickerItemData) {
     const { set } = this.state;
     if (!set) {
       return;
@@ -82,6 +118,14 @@ class Home extends React.Component<Props, State> {
   }
 
   @bind
+  handleChallengesPickerSelected(item: PickerItemData) {
+    const { navigation, kanjiProficiencies } = this.props;
+    const params: ChallengeNavigationProps =
+      { characters: getRandomKanjiProficiency(item.value as number, kanjiProficiencies) };
+    navigation.navigate(routes.Challenge, params);
+  }
+
+  @bind
   handleChangeAccordion(indexes: number[]) {
     this.setState({
       activeSections: indexes
@@ -91,7 +135,7 @@ class Home extends React.Component<Props, State> {
   renderSetItem(set: Set, index: number) {
     return (
       <SetItem
-        onPress={this.handlePressSet}
+        onPress={this.handlePressExercisesSet}
         key={index + ''}
         set={set}
       />
@@ -134,9 +178,29 @@ class Home extends React.Component<Props, State> {
   }
 
   render() {
+    const { kanjiProficiencies } = this.props;
     const { collections, activeSections } = this.state;
     return (
       <ScrollView style={styles.container}>
+        <Card containerStyle={styles.card} >
+          <View style={styles.cardHeaderContainer}>
+            <Icon name="target" type="material-community" color={colors.white} size={20} />
+            <Card.Title style={styles.cardHeader}>
+              Challenges
+            </Card.Title>
+            <Icon name="target" type="material-community" color={colors.transparent} size={20} />
+          </View>
+          <SetItem
+            onPress={this.handlePressChallengesSet}
+            showTotal={true}
+            set={{
+              title: 'Review: Writing Challenge',
+              initial: 'RWC',
+              color: circleColors.red,
+              characters: kanjiProficiencies.map(kp => kp.kanji)
+            }}
+          />
+        </Card>
         <Card containerStyle={styles.card} >
           <View style={styles.cardHeaderContainer}>
             <Icon name="pen" type="material-community" color={colors.white} size={20} />
@@ -155,9 +219,14 @@ class Home extends React.Component<Props, State> {
         </Card>
         <View style={{ flex: 1, height: 20 }} />
         <Picker
-          ref={el => this.picker = el}
-          data={this.mapPickerItems()}
-          onSelected={this.handlePickerSelected}
+          ref={el => this.challengespicker = el}
+          data={this.mapChallengesPickerItems()}
+          onSelected={this.handleChallengesPickerSelected}
+        />
+        <Picker
+          ref={el => this.exercisespicker = el}
+          data={this.mapExercisesPickerItems()}
+          onSelected={this.handleExercisesPickerSelected}
         />
       </ScrollView >
     );
@@ -166,8 +235,7 @@ class Home extends React.Component<Props, State> {
 
 function mapStateToProps(state: ReduxState): StateProps {
   return {
-    lastRatingPopup: state.session.rating.lastRatingPopup,
-    isRated: state.session.rating.isRated
+    kanjiProficiencies: state.session.proficiency.kanji
   };
 }
 

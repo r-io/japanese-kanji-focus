@@ -1,7 +1,10 @@
+import { setSessionData } from '@actions/sessionActions';
 import colors from '@constants/colors';
 import { mapNavigationToState } from '@helpers/navigation';
 import { Path, SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
 import { Coordinate } from '@typings/model/coordinate';
+import { KanjiProficiency } from '@typings/model/kanjiProficiency';
+import ReduxState from '@typings/reduxState';
 import bind from 'bind-decorator';
 import KanjiDictionary from 'kanji-dictionary-lookup';
 import { KanjiResult } from 'kanji.js';
@@ -15,17 +18,22 @@ import { NavigationStackScreenProps } from 'react-navigation-stack';
 import { connect, DispatchProp } from 'react-redux';
 import styles from './styles/Challenge.styles';
 
+export interface StateProps {
+  kanjiProficiencies: KanjiProficiency[];
+}
+
 export interface NavigationProps {
   characters: string[];
 }
 
-type Props = NavigationStackScreenProps<NavigationProps> & DispatchProp;
+type Props = NavigationStackScreenProps<NavigationProps> & DispatchProp & StateProps;
 
 interface State extends NavigationProps {
   detailsHeight: number;
   canvasSize: number;
   step: number;
   tries: number;
+  score: number;
   strokeCoordinates: Coordinate[][];
   kanjiDetail?: KanjiResult;
   showHintButton: boolean;
@@ -48,6 +56,7 @@ class Challenge extends React.Component<Props, State> {
       canvasSize: Dimensions.get('window').width - 60,
       step: 0,
       tries: 0,
+      score: 100,
       showHintButton: false,
       showKanjiHint: false,
       showCorrect: false,
@@ -60,14 +69,30 @@ class Challenge extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    const { step, strokeCoordinates, tries, showHintButton, showCorrect } = this.state;
+    const { dispatch, kanjiProficiencies } = this.props;
+    const { step, strokeCoordinates, tries, score, showHintButton, showCorrect, kanjiDetail } = this.state;
     if (step === strokeCoordinates.length && strokeCoordinates.length > 0) {
       if (!showCorrect) {
+        if (kanjiDetail) {
+          const index = kanjiProficiencies.findIndex(kp => kp.kanji === kanjiDetail.literal);
+          if (index === -1) {
+            kanjiProficiencies.push({
+              kanji: kanjiDetail.literal,
+              score: score < 0 ? 0 : score,
+              lastAttempt: new Date(),
+            });
+          } else {
+            kanjiProficiencies[index].lastAttempt = new Date();
+            kanjiProficiencies[index].score = score < 0 ? 0 : score;
+          }
+          dispatch(setSessionData('proficiency', { kanji: kanjiProficiencies }));
+        }
         this.setState({ showCorrect: true }, () => {
           this.kanjiCorrect?.animate(() => {
             setTimeout(() => {
               this.setState({
                 step: 0,
+                score: 100,
                 strokeCoordinates: [],
                 showCorrect: false
               }, () => {
@@ -149,7 +174,7 @@ class Challenge extends React.Component<Props, State> {
       };
     });
 
-    const { strokeCoordinates, step, tries } = this.state;
+    const { strokeCoordinates, step, tries, score } = this.state;
     if (step === strokeCoordinates.length) {
       return;
     }
@@ -162,7 +187,8 @@ class Challenge extends React.Component<Props, State> {
       });
     } else {
       this.setState({
-        tries: tries < 3 ? tries + 1 : tries
+        tries: tries < 3 ? tries + 1 : tries,
+        score: score - 10,
       });
     }
   }
@@ -400,4 +426,10 @@ class Challenge extends React.Component<Props, State> {
   }
 }
 
-export default connect()(Challenge);
+function mapStateToProps(state: ReduxState): StateProps {
+  return {
+    kanjiProficiencies: state.session.proficiency.kanji
+  };
+}
+
+export default connect(mapStateToProps)(Challenge);
