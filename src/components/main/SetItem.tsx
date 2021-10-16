@@ -12,7 +12,7 @@ interface Props {
 
 interface State { }
 
-class SetItem extends React.PureComponent<Props, State> {
+class SetItem extends React.Component<Props, State> {
 
   @bind
   handlePress() {

@@ -15,6 +15,7 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import { Card, Icon } from 'react-native-elements';
+import { NavigationEventSubscription } from 'react-navigation';
 import { NavigationStackScreenProps } from 'react-navigation-stack';
 import { connect, DispatchProp } from 'react-redux';
 import SetItem from './SetItem';
@@ -36,6 +37,7 @@ class Home extends React.Component<Props, State> {
 
   challengespicker: Picker | null = null;
   exercisespicker: Picker | null = null;
+  navigationListener: NavigationEventSubscription | null = null;
 
   constructor(props: Props) {
     super(props);
@@ -45,10 +47,15 @@ class Home extends React.Component<Props, State> {
     };
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.kanjiProficiencies.length !== this.props.kanjiProficiencies.length) {
-      this.render();
-    }
+  componentDidMount() {
+    this.navigationListener = this.props.navigation.addListener(
+      'willFocus',
+      () => this.forceUpdate()
+    );
+  }
+
+  componentWillUnmount() {
+    this.navigationListener?.remove();
   }
 
 	mapChallengesPickerItems(): PickerItemData[] {
@@ -177,6 +184,15 @@ class Home extends React.Component<Props, State> {
     );
   }
 
+  generateChallengeSet(kanjiProficiencies: KanjiProficiency[]): Set {
+    return {
+      title: 'Review: Writing Challenge',
+      initial: 'RWC',
+      color: circleColors.red,
+      characters: kanjiProficiencies.map(kp => kp.kanji)
+    };
+  }
+
   render() {
     const { kanjiProficiencies } = this.props;
     const { collections, activeSections } = this.state;
@@ -193,12 +209,7 @@ class Home extends React.Component<Props, State> {
           <SetItem
             onPress={this.handlePressChallengesSet}
             showTotal={true}
-            set={{
-              title: 'Review: Writing Challenge',
-              initial: 'RWC',
-              color: circleColors.red,
-              characters: kanjiProficiencies.map(kp => kp.kanji)
-            }}
+            set={this.generateChallengeSet(kanjiProficiencies)}
           />
         </Card>
         <Card containerStyle={styles.card} >

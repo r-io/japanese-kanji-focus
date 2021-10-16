@@ -1,3 +1,4 @@
+import { setSessionData } from '@actions/sessionActions';
 import AppDialog from '@components/app/AppDialog';
 import AppLoading from '@components/app/AppLoading';
 import Challenge from '@components/challenge/Challenge';
@@ -7,7 +8,9 @@ import LogoTitle from '@components/navigation/LogoTitle';
 import Search from '@components/search/Search';
 import Study from '@components/study/Study';
 import routes from '@constants/routes';
+import storage from '@constants/storage';
 import { getStatusBarSettings } from '@helpers/statusBar';
+import { getStorageItem } from '@helpers/storage';
 import rootReducer from '@reducers/rootReducers';
 import navigationStyle, { navigationCard } from '@themes/navigation';
 import theme from '@themes/theme';
@@ -19,7 +22,7 @@ import { API_URL } from 'react-native-dotenv';
 import { ThemeProvider } from 'react-native-elements';
 import Orientation from 'react-native-orientation-locker';
 import SplashScreen from 'react-native-splash-screen';
-import { createAppContainer, NavigationContainerComponent, NavigationState } from 'react-navigation';
+import { createAppContainer, NavigationActions, NavigationContainerComponent, NavigationState, StackActions } from 'react-navigation';
 import { createStackNavigator, StackHeaderLeftButtonProps } from 'react-navigation-stack';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
@@ -71,6 +74,15 @@ class App extends React.Component<Props, State> {
 
   async componentDidMount() {
     Orientation.lockToPortrait();
+
+    const proficiency = await getStorageItem(storage.session.proficiency);
+    store.dispatch(setSessionData('proficiency', proficiency));
+
+    this.navigator?.dispatch(StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: routes.Main })],
+    }));
+
     SplashScreen.hide();
   }
 

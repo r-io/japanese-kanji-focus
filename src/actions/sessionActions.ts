@@ -11,8 +11,3 @@ export function setSessionData<T extends keyof SessionState>
 		value
 	};
 }
-
-// { [key in keyof State]?: State[key] }
-
-// export function setSessionData<T extends keyof SessionState>
-// 	(key: T, value: SessionState[T]): SetSessionDataAction<keyof SessionState> {
