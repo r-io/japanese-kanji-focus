@@ -18,7 +18,8 @@ import { Card, Icon } from 'react-native-elements';
 import { NavigationEventSubscription } from 'react-navigation';
 import { NavigationStackScreenProps } from 'react-navigation-stack';
 import { connect, DispatchProp } from 'react-redux';
-import SetItem from './SetItem';
+import ChallengesSetItem from './ChallengesSetItem';
+import ExercisesSetItem from './ExercisesSetItem';
 import styles from './styles/Home.styles';
 
 export interface StateProps {
@@ -61,14 +62,15 @@ class Home extends React.Component<Props, State> {
 	mapChallengesPickerItems(): PickerItemData[] {
     const { kanjiProficiencies } = this.props;
     const result: PickerItemData[] = [];
+    const numOfCharacters = [10,25,50,100,200];
 
-    for (let i=10; i<=100; i+=10) {
-      if (kanjiProficiencies.length < i) {
+    for (const numOfCharacter of numOfCharacters) {
+      if (kanjiProficiencies.length < numOfCharacter) {
         break;
       }
       result.push({
-        label: i + ' Characters',
-        value: i
+        label: numOfCharacter + ' Characters',
+        value: numOfCharacter
       });
     }
     result.push({
@@ -141,7 +143,7 @@ class Home extends React.Component<Props, State> {
 
   renderSetItem(set: Set, index: number) {
     return (
-      <SetItem
+      <ExercisesSetItem
         onPress={this.handlePressExercisesSet}
         key={index + ''}
         set={set}
@@ -206,9 +208,8 @@ class Home extends React.Component<Props, State> {
             </Card.Title>
             <Icon name="target" type="material-community" color={colors.transparent} size={20} />
           </View>
-          <SetItem
+          <ChallengesSetItem
             onPress={this.handlePressChallengesSet}
-            showTotal={true}
             set={this.generateChallengeSet(kanjiProficiencies)}
           />
         </Card>

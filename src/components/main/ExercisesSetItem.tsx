@@ -2,17 +2,14 @@ import { Set } from '@typings/model/sets';
 import bind from 'bind-decorator';
 import React from 'react';
 import { Avatar, ListItem } from 'react-native-elements';
-import styles from './styles/SetItem.styles';
+import styles from './styles/ExercisesSetItem.styles';
 
 interface Props {
   set: Set;
-  showTotal?: boolean;
   onPress: (set: Set) => void;
 }
 
-interface State { }
-
-class SetItem extends React.Component<Props, State> {
+class ExercisesSetItem extends React.PureComponent<Props> {
 
   @bind
   handlePress() {
@@ -21,7 +18,7 @@ class SetItem extends React.Component<Props, State> {
   }
 
   render() {
-    const { set, showTotal } = this.props;
+    const { set } = this.props;
     return (
       <ListItem
         containerStyle={styles.container}
@@ -37,10 +34,7 @@ class SetItem extends React.Component<Props, State> {
         />
         <ListItem.Content>
           <ListItem.Title style={styles.title}>{set.title}</ListItem.Title>
-          { showTotal
-            ? <ListItem.Subtitle style={styles.subtitle}>{set.characters.length} Kanji</ListItem.Subtitle>
-            : <ListItem.Subtitle style={styles.subtitle}>{set.characters}</ListItem.Subtitle>
-          }
+          <ListItem.Subtitle style={styles.subtitle}>{set.characters}</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
@@ -48,4 +42,4 @@ class SetItem extends React.Component<Props, State> {
   }
 }
 
-export default SetItem;
+export default ExercisesSetItem;

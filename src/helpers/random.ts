@@ -9,7 +9,7 @@ export function randomNumber(min: number, max: number): number {
 export function getRandomKanjiProficiency(numOfCharacters: number, kanjiProficiencies: KanjiProficiency[]): string[] {
   const values: Array<{kanji: string, score: number}> = kanjiProficiencies.map(kp => {
     const dayDifference =
-      Math.floor((new Date().getTime() - kp.lastAttempt.getTime()) / (1000*60*60*24));
+      Math.floor((new Date().getTime() - new Date(kp.lastAttempt).getTime()) / (1000*60*60*24));
     const additionalScore = 100 - (kp.score - dayDifference);
     return {
       kanji: kp.kanji,
