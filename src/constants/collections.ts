@@ -432,7 +432,152 @@ const part3: Set[] = [
     }
 ];
 
-
+const part4: Set[] = [
+    {
+        title: 'Exercise 65',
+        initial: 'E65',
+        color: circleColors.purple1,
+        characters: ['数', '原', '期', '現', '指', '加', '制', '向']
+    },
+    {
+        title: 'Exercise 66',
+        initial: 'E66',
+        color: circleColors.purple2,
+        characters: ['務', '面', '得', '打', '告', '支', '参', '報'],
+    },
+    {
+        title: 'Exercise 67',
+        initial: 'E67',
+        color: circleColors.purple3,
+        characters: ['角', '解', '求', '球', '流', '局', '資', '昨'],
+    },
+    {
+        title: 'Exercise 68',
+        initial: 'E68',
+        color: circleColors.purple4,
+        characters: ['権', '判', '在', '件', '任', '位', '置', '想'],
+    },
+    {
+        title: 'Exercise 69',
+        initial: 'E69',
+        color: circleColors.purple5,
+        characters: ['増', '示', '認', '助', '追', '商', '落', '確'],
+    },
+    {
+        title: 'Exercise 70',
+        initial: 'E70',
+        color: circleColors.purple6,
+        characters: ['費', '容', '演', '論', '能', '美', '命', '裏'],
+    },
+    {
+        title: 'Exercise 71',
+        initial: 'E71',
+        color: circleColors.purple7,
+        characters: ['福', '格', '害', '深', '常', '状', '職', '構'],
+    },
+    {
+        title: 'Exercise 72',
+        initial: 'E72',
+        color: circleColors.purple8,
+        characters: ['令', '路', '労', '例', '然', '客', '断', '疑'],
+    },
+    {
+        title: 'Exercise 73',
+        initial: 'E73',
+        color: circleColors.purple9,
+        characters: ['登', '規', '術', '備', '差', '種', '望', '具'],
+    },
+    {
+        title: 'Exercise 74',
+        initial: 'E74',
+        color: circleColors.purple10,
+        characters: ['観', '察', '割', '難', '優', '収', '限', '候'],
+    },
+    {
+        title: 'Exercise 75',
+        initial: 'E75',
+        color: circleColors.purple11,
+        characters: ['晴', '返', '満', '敗', '退', '積', '警', '訪'],
+    },
+    {
+        title: 'Exercise 76',
+        initial: 'E76',
+        color: circleColors.purple12,
+        characters: ['殺', '単', '非', '完', '等', '曲', '庭', '給'],
+    },
+    {
+        title: 'Exercise 77',
+        initial: 'E77',
+        color: circleColors.purple13,
+        characters: ['与', '財', '識', '鳴', '愛', '程', '類', '列'],
+    },
+    {
+        title: 'Exercise 78',
+        initial: 'E78',
+        color: circleColors.purple14,
+        characters: ['師', '易', '破', '呼', '責', '才', '努', '散'],
+    },
+    {
+        title: 'Exercise 79',
+        initial: 'E79',
+        color: circleColors.purple15,
+        characters: ['喜', '値', '因', '陽', '富', '処', '適', '婦'],
+    },
+    {
+        title: 'Exercise 80',
+        initial: 'E80',
+        color: circleColors.purple16,
+        characters: ['寄', '否', '余', '欠', '存', '礼', '除', '渡'],
+    },
+    {
+        title: 'Exercise 81',
+        initial: 'E81',
+        color: circleColors.purple17,
+        characters: ['願', '許', '罪', '精', '折', '亡', '箱', '掛'],
+    },
+    {
+        title: 'Exercise 82',
+        initial: 'E82',
+        color: circleColors.purple18,
+        characters: ['掛', '突', '背', '居', '雑', '犯', '似', '迷'],
+    },
+    {
+        title: 'Exercise 83',
+        initial: 'E83',
+        color: circleColors.purple19,
+        characters: ['捕', '勤', '迎', '刻', '舞', '欲', '探', '頼'],
+    },
+    {
+        title: 'Exercise 84',
+        initial: 'E84',
+        color: circleColors.purple20,
+        characters: ['途', '抜', '暮', '慣', '貧', '浮', '倒', '更'],
+    },
+    {
+        title: 'Exercise 85',
+        initial: 'E85',
+        color: circleColors.purple21,
+        characters: ['誤', '幾', '抱', '恐', '越', '互', '逃', '緒'],
+    },
+    {
+        title: 'Exercise 86',
+        initial: 'E86',
+        color: circleColors.purple22,
+        characters: ['腹', '頂', '到', '盗', '御', '吹', '杯', '煙'],
+    },
+    {
+        title: 'Exercise 87',
+        initial: 'E87',
+        color: circleColors.purple23,
+        characters: ['怖', '忙', '靴', '偶', '偉', '猫', '帯', '玉'],
+    },
+    {
+        title: 'Exercise 88',
+        initial: 'E88',
+        color: circleColors.purple24,
+        characters: ['谷', '材', '毛', '雲', '黄', '油', '血', '温'],
+    }
+];
 
 const collections: Collection[] = [
     {
@@ -449,6 +594,11 @@ const collections: Collection[] = [
         index: 3,
         title: 'Part 3',
         sets: part3
+    },
+    {
+        index: 4,
+        title: 'Part 4',
+        sets: part4
     }
 ];
 
