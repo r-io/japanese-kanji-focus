@@ -229,7 +229,7 @@ class Home extends React.Component<Props, State> {
             onChange={this.handleChangeAccordion}
           />
         </Card>
-        <View style={{ flex: 1, height: 20 }} />
+        <View style={styles.bottomContainer} />
         <Picker
           ref={el => this.challengespicker = el}
           data={this.mapChallengesPickerItems()}

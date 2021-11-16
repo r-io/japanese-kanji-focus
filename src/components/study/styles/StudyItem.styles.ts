@@ -50,5 +50,35 @@ export default StyleSheet.create({
     meaning: {
         ...fonts.largeArial,
         textAlign: 'left'
+    },
+    compoundsContainer: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+    compoundContainer: {
+        flex: 1,
+        marginBottom: 2,
+        paddingBottom: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.mediumGray,
+        width: '100%'
+    },
+    compoundUpperContainer: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    compoundKanjiText: {
+        flex: 1,
+        ...fonts.largeMaru,
+        fontWeight: 'bold'
+    },
+    compoundKanaText: {
+        flex: 2,
+        ...fonts.largeMaru,
+        fontWeight: 'bold'
+    },
+    compoundTranslationText: {
+        flex: 1,
+        ...fonts.mediumArial,
     }
 });

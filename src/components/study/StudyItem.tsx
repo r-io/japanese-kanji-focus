@@ -1,7 +1,7 @@
 import bind from 'bind-decorator';
 import { KanjiResult } from 'kanji.js';
 import React from 'react';
-import {  View } from 'react-native';
+import {  ScrollView, View } from 'react-native';
 import { Badge, Text } from 'react-native-elements';
 import { Kanji } from 'react-native-kanji-animation';
 import { connect } from 'react-redux';
@@ -94,6 +94,17 @@ class StudyItem extends React.Component<Props, State> {
             )}
           </DetailRow>
         }
+        <DetailRow title="Compounds:" valueContainerStyle={styles.compoundsContainer}>
+          {kanjiDetail.compounds.map(compound =>
+            <View style={styles.compoundContainer} key={compound.kanji + ' ' + compound.kana}>
+              <View style={styles.compoundUpperContainer}>
+                <Text style={styles.compoundKanjiText}>{compound.kanji}</Text>
+                <Text style={styles.compoundKanaText}>{compound.kana}</Text>
+              </View>
+              <Text style={styles.compoundTranslationText}>{compound.translation}</Text>
+            </View>
+          )}
+        </DetailRow>
       </View>
     );
   }
@@ -101,10 +112,10 @@ class StudyItem extends React.Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.innerContainer}>
+        <ScrollView style={styles.innerContainer} showsVerticalScrollIndicator={false}>
           {this.renderUpperDetails()}
           {this.renderLowerDetails()}
-        </View>
+        </ScrollView>
       </View>
     );
   }

@@ -9,6 +9,12 @@ declare module 'kanji.js' {
     meanings: string[],
     onyomi: string[],
     stroke_count: number;
+    compounds: Array<{
+      kana: string,
+      kanji: string,
+      translation: string;
+      type: string;
+    }>
   }
 
   interface SearchOptions {

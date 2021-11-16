@@ -3,7 +3,7 @@ import bind from 'bind-decorator';
 import KanjiDictionary from 'kanji-dictionary-lookup';
 import { KanjiResult } from 'kanji.js';
 import React from 'react';
-import {  Dimensions, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { Kanji } from 'react-native-kanji-animation';
 import Modal from 'react-native-modal';
 import Carousel from 'react-native-snap-carousel';
@@ -104,7 +104,11 @@ class Study extends React.Component<Props, State> {
   renderItem(item: KanjiResult) {
     const { screenWidth } = this.state;
     return (
-      <StudyItem kanjiDetail={item} canvasSize={screenWidth/3} onPressPractice={this.handlePressPractice} />
+      <StudyItem
+        kanjiDetail={item}
+        canvasSize={screenWidth/3}
+        onPressPractice={this.handlePressPractice}
+      />
     );
   }
 
