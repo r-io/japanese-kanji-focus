@@ -114,6 +114,7 @@ class Challenge extends React.Component<Props, State> {
 
     if (characters.length === 0) {
       navigation.goBack();
+      return;
     }
 
     const index = Math.floor(Math.random() * characters.length);
