@@ -5,10 +5,8 @@ const routes = {
 
     Main: 'Main',
     Home: 'Home',
-    Favourite: 'Favourite',
+    List: 'List',
     Settings: 'Settings',
-
-    Search: 'Search',
 
     Study: 'Study',
     Challenge: 'Challenge',

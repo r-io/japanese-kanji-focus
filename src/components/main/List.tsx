@@ -5,7 +5,7 @@ import { connect, DispatchProp } from 'react-redux';
 
 type Props = NavigationStackScreenProps & DispatchProp;
 
-class Favourite extends React.Component<Props> {
+class List extends React.Component<Props> {
 
   render() {
     return (
@@ -15,4 +15,4 @@ class Favourite extends React.Component<Props> {
 
 }
 
-export default connect()(Favourite);
+export default connect()(List);

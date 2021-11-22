@@ -22,13 +22,8 @@ const colors = {
     orange: '#f26c23',
     secondary: '#f26c23',
 
-    // trueWhite: '#ffffff',
-
-    // error: '#ff0000',
-
     transparent: 'rgba(0,0,0,0)',
-    ripple: 'rgba(255,255,255,0.2)',
-    // fadeBlack: 'rgba(0,0,0,0.6)'
+    ripple: 'rgba(255,255,255,0.2)'
 };
 
 export default colors;

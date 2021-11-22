@@ -5,7 +5,6 @@ import Challenge from '@components/challenge/Challenge';
 import Main from '@components/main/Main';
 import BackButton from '@components/navigation/BackButton';
 import LogoTitle from '@components/navigation/LogoTitle';
-import Search from '@components/search/Search';
 import Study from '@components/study/Study';
 import routes from '@constants/routes';
 import storage from '@constants/storage';
@@ -14,11 +13,9 @@ import { getStorageItem } from '@helpers/storage';
 import rootReducer from '@reducers/rootReducers';
 import navigationStyle, { navigationCard } from '@themes/navigation';
 import theme from '@themes/theme';
-import Axios from 'axios';
 import bind from 'bind-decorator';
 import React from 'react';
 import { StatusBar, StatusBarProps, View } from 'react-native';
-import { API_URL } from 'react-native-dotenv';
 import { ThemeProvider } from 'react-native-elements';
 import Orientation from 'react-native-orientation-locker';
 import SplashScreen from 'react-native-splash-screen';
@@ -33,7 +30,6 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 const AppNavigator = createStackNavigator(
   {
     Main,
-    Search,
     Study,
     Challenge,
   },
@@ -51,9 +47,6 @@ const AppNavigator = createStackNavigator(
 );
 
 const AppContainer = createAppContainer(AppNavigator);
-
-Axios.defaults.baseURL = API_URL;
-Axios.defaults.headers.common.isappuser = true;
 
 interface Props { }
 

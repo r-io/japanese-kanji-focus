@@ -1,6 +1,3 @@
-// api
-export const CALL_API = 'CALL_API';
-
 // auth
 export const SET_USER = 'SET_USER';
 export const REMOVE_USER = 'REMOVE_USER';

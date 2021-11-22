@@ -1,8 +1,7 @@
-import Favourite from '@components/main/Favourite';
 import Home from '@components/main/Home';
+import List from '@components/main/List';
 import Settings from '@components/main/Settings';
 import LogoTitle from '@components/navigation/LogoTitle';
-import SearchButton from '@components/navigation/SearchButton';
 import colors from '@constants/colors';
 import routes from '@constants/routes';
 import React from 'react';
@@ -13,14 +12,14 @@ import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 const Main = createMaterialTopTabNavigator(
   {
     Home,
-    Favourite,
+    List,
     Settings
   },
   {
     navigationOptions: ({ navigation }) => ({
       headerLeft: () => <View />,
       headerTitle: () => <LogoTitle onPress={() => navigation.navigate(routes.Home)} />,
-      headerRight: () => <SearchButton onPress={() => navigation.navigate(routes.Search)} />
+      headerRight: () => <View />
     }),
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
@@ -30,9 +29,9 @@ const Main = createMaterialTopTabNavigator(
         if (routeName === routes.Home) {
           iconType = 'ionicon';
           iconName = 'home';
-        } else if (routeName === routes.Favourite) {
+        } else if (routeName === routes.List) {
           iconType = 'ionicon';
-          iconName = 'heart';
+          iconName = 'list';
         } else if (routeName === routes.Settings) {
           iconType = 'ionicon';
           iconName = 'md-settings-sharp';

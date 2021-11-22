@@ -8,8 +8,7 @@ export function getStatusBarSettings(route: string): StatusBarProps {
     case routes.Main:
     case routes.Home:
     case routes.Settings:
-    case routes.Favourite:
-    case routes.Search:
+    case routes.List:
     case routes.Study:
     case routes.Challenge:
     default:
